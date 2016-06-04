@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+
+{% block content-left %}
+
+<form method="post" action="{% url 'create_article' %}" enctype="multipart/form-data">{% csrf_token %}
+  <div class="form-group">
+    <label for="title">文章标题</label>
+    <input type="title" class="form-control" id="title" placeholder="title" name="title">
+  </div>
+    <div class="form-group">
+      <label for="name">文章分类</label>
+      <select class="form-control" name="cate_id">
+          {% for cate in category %}
+         <option value="{{ cate.id }}">{{ cate.name }}</option>
+          {% endfor %}
+      </select>
+    </div>
+  <div class="form-group">
+    <label for="brief">摘要</label>
+    <input type="brief" class="form-control" id="brief" placeholder="brief" name="brief">
+  </div>
+  <div class="form-group">
+    <label for="content">文章内容</label>
+    <textarea name="content" id="content" placeholder="content"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="title_img">File input</label>
+    <input type="file" id="title_img" name="title_img">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+{% endblock %}
+
+{% block content-right %}
+    right bar
+{% endblock %}
+
+    {% block bottom-js %}
+        <script type="text/javascript" src="/static/plugins/tinymce/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea' });</script>
+    {% endblock %}
